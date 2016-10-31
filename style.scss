@@ -1,0 +1,421 @@
+// @Author: Matthew Juggins <matthewjuggins>
+// @Date:   04-10-16
+// @Email:  jugginsmatthew@gmail.com
+// @Last modified by:   matthewjuggins
+// @Last modified time: 26-10-16
+// Description:
+
+
+/*
+@fa-font-path: "https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css";
+@fa-font-path: "../CodeLibraries/min/font-awesome.min.css";
+*/
+
+/* Variables */
+$font-face: 'Roboto Condensed', sans-serif;
+$color-list: #ff4351, #fd6631, #fc880f, #feae1b, #ffd426, #a5de37, #49e845, #55dae1, #1b9af7, #7b72e9, #db49d8, #ed4694;
+$default-color: #ff4351;
+$light-grey: #ccc;
+$grey: #555;
+$item-margin: 5px 5px;
+
+/* Mixins */
+@mixin container($grow, $basis, $order){
+  flex-basis: $basis;
+  flex-grow: $grow;
+  margin: 10px;
+  order: $order;
+}
+
+@mixin flex-container($display, $direction, $wrap, $justify, $items, $content) {
+	display: $display;
+	flex-direction: $direction;
+	flex-wrap: $wrap;
+	justify-content: $justify;
+	align-items: $items;
+	align-content: $content;
+	-webkit-display: "-webkit-#{$display}";
+	-webkit-flex-direction: $direction;
+	-webkit-flex-wrap: $wrap;
+	-webkit-justify-content: $justify;
+	-webkit-align-items: $items;
+	-webkit-align-content: $content;
+}
+
+@mixin flex-item($align-self: auto, $basis: auto, $grow: 0, $order: 0){
+  flex-basis: $basis;
+  flex-grow: $grow;
+  order: $order;
+  align-self: $align-self;
+  -webkit-flex-basis: $basis;
+  -webkit-flex-grow: $grow;
+  -webkit-order: $order;
+  -webkit-align-self: $align-self;
+}
+
+@mixin mouse-effects($cursor, $outline-style, $outline-offset, $outline-color, $border) {
+	cursor: $cursor;
+  outline-style: $outline-style;
+  outline-offset: $outline-offset;
+  outline-color: $outline-color;
+  border: $border;
+}
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+@mixin position($position, $top: null, $right: null, $bottom: null, $left: null) {
+  position: $position;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+@mixin absolute($args...) {
+  @include position(absolute, $args...);
+}
+
+@mixin relative($args...) {
+  @include position(relative, $args...);
+}
+
+@mixin fixed($args...) {
+  @include position(fixed, $args...);
+}
+
+@mixin self-alignment($align) {
+  align-self: $align;
+  -webkit-align-self: $align;
+}
+
+@mixin size($width, $height: $width) {
+      width: $width;
+      height: $height;
+}
+
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+/* Loops */
+@each $color in $color-list {
+    $i: index($color-list, $color);
+    .slice:nth-child(#{$i}) {
+      background: $color;
+      transform: rotate(#{30 * ($i - 1)}deg) skewY(-60deg);
+    }
+}
+
+@for $j from 1 through 4 {
+  .thickness:nth-child(#{$j}):after {
+    width: 5px * $j;
+    height: 5px * $j;
+  }
+}
+
+/* Placeholders */
+%container {
+  @include flex-item(auto, auto, 1, 0);
+  text-align: center;
+  margin: 10px;
+}
+
+/* Typical elements */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  user-select: none;
+  font-family: $font-face;
+	font-weight: 300;
+}
+
+body {
+  //background-color: rgb(242, 244, 246);
+  @include size(100vw, 100vh);
+  background-color: #292929;
+  background-size: cover;
+  background-position: center center;
+}
+
+/* Text */
+h1 {
+  @include relative();
+  color: $light-grey;
+  font-size: 18px;
+}
+
+p {
+  color: $light-grey;
+  font-size: 12px;
+}
+
+ul {
+  color: $light-grey;
+}
+
+/* Classes by Name A-Z */
+.color {
+  @include absolute($left: -100%);
+  @include size(200%, 200%);
+  border-radius: 50%;
+  cursor: pointer;
+  transform: skewY(60deg);
+  &.active {
+    cursor: default;
+    &:after {
+      @include absolute();
+      @include size(0, 0);
+      border-radius: 30%;
+      margin: 0px 0px;
+      transform: rotate(15deg);
+    }
+  }
+}
+
+.color-option {
+  @include relative();
+  @include size(150px, 150px);
+  background: #000;
+  border: solid 5px #000;
+  border-radius: 50%;
+  margin: $item-margin;
+  overflow: hidden;
+}
+
+.container-left {
+  @extend %container;
+  @include flex-container(flex, row, nowrap, flex-end, center, stretch);
+}
+
+.container-right {
+  @extend %container;
+  @include flex-container(flex, column, nowrap, flex-start, center, stretch);
+}
+
+#text-container-right {
+  @extend %container;
+  @extend .container-right;
+  @include flex-item(auto, auto, 2, 0);
+  text-align: left;
+  color: $light-grey;
+  @include opacity(0);
+}
+
+.fa {
+  @include absolute($top: 50%, $left: 50%);
+  color: $light-grey;
+  transform: translate(-50%, -50%);
+}
+
+.item-text{
+  @include self-alignment(flex-start);
+  margin: $item-margin;
+}
+
+.slice {
+  @include size(50%, 50%);
+  @include absolute($top: 0, $right: 0);
+  overflow: hidden;
+  transform-origin: 0% 100%;
+  &:hover {
+     @include opacity(.9);
+  }
+}
+
+// Slider bar
+.slider {
+  @include absolute();
+  @include self-alignment(flex-start);
+  @include size(100px, 15px);
+  background: $grey;
+  border-radius: 10px;
+  margin: 10px 15px;
+  &.musicInfo {
+     @include relative();
+  }
+}
+
+// Movable Slider
+.slider label {
+  @include absolute($top: -10px, $left: -10px);
+  @include size(35px, 35px);
+  @include transition(all .5s ease);
+  background: $light-grey;
+  border-radius: 50%;
+  cursor: pointer;
+  display: block;
+}
+
+// Slider movement
+.slider input[type=checkbox]:checked + label {
+  left: 70px;
+}
+
+.sprite {
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/713593/ambientCanvasSpriteSheet.png") no-repeat;
+}
+
+/* Tags by name A-Z */
+#beat-option {
+  @include relative();
+  margin: $item-margin;
+  text-align: center;
+  @include self-alignment(flex-start);
+  .beat-button {
+    @include mouse-effects(pointer, none, 0, initial, 1px solid);
+    @include opacity(.5);
+    @include relative();
+    @include size(35px, 35px);
+    border-radius: 50%;
+    color: #CCC;
+    display: inline-block;
+    line-height: 35px;
+    &:hover {
+      @include mouse-effects(pointer, none, 0, initial, 2px solid);
+      @include opacity(.7);
+    }
+    &.active {
+      @include mouse-effects(pointer, none, 0, initial, 3px solid);
+      @include opacity(1);
+      line-height: 33px;
+    }
+  }
+}
+
+#canvas {
+  @include size(600px, 480px);
+  @include fixed($top: calc(50% - 200px), $left: calc(50% - 300px));
+  background: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .1);
+  cursor: crosshair;
+}
+
+#clear-button {
+  @include relative();
+  @include self-alignment(flex-start);
+  @include size(100px, 100px);
+  @include transition(all .2s ease);
+  border: 4px solid $light-grey;
+  border-radius: 50%;
+  margin: $item-margin;
+  text-align: center;
+  &:hover {
+    @include opacity(.85);
+  }
+  &:active {
+    @include opacity(.75);
+    transform: scale(.97);
+  }
+}
+
+#gridCanvas {
+  @extend #canvas;
+  background: transparent;
+}
+
+#eraser-image {
+  @include relative();
+  @include self-alignment(flex-end);
+  @include size(50px, 100px);
+  background-position: -200px 0px;
+  margin: $item-margin;
+  &:hover {
+    @include mouse-effects(pointer, none, 0px, initial, 0);
+  }
+  &.active {
+    @include mouse-effects(pointer, dashed, 3px, #FFF, 0);
+  }
+}
+
+input[type=checkbox] {
+  visibility: hidden;
+}
+
+#pencil {
+  @include self-alignment(flex-end);
+  margin: $item-margin;
+}
+
+#pencil-backing {
+    @include size(50px, 160px);
+    @include absolute();
+    background: $default-color;
+    color: $default-color;
+    margin-top: 40px;
+    &:before {
+      @include size(0, 0);
+      @include absolute($top: -40px, $left: 0);
+      //color: $default-color;
+      border: {
+        bottom: 40px solid;
+        left: 25px solid transparent;
+        right: 25px solid transparent;
+      }
+      content: "";
+    }
+}
+
+#pencil-image {
+  @include size(50px, 200px);
+  @include relative();
+  background-position: -150px 0px;
+  color: $default-color;
+  &:hover {
+    @include mouse-effects(pointer, none, 0px, initial, 0);
+  }
+  &.active {
+    @include mouse-effects(pointer, dashed, 3px, $default-color, 0);
+  }
+}
+
+#panel-left {
+  @include fixed($top: calc(50% - 200px), $left: calc(50% - 600px));
+  @include flex-container(flex, column, wrap, flex-start, stretch, stretch);
+  @include size(300px, 480px);
+}
+
+#panel-right {
+  @extend #panel-left;
+  left: calc(50% + 300px);
+}
+
+#thickness-option {
+  @include opacity(.5);
+  @include size(60px, 200px);
+  @include relative();
+  @include self-alignment(flex-end);
+  @include transition(all .2s);
+  margin: $item-margin;
+  text-align: center;
+  .thickness {
+    @include relative();
+    @include size(40px, 40px);
+    border-radius: 50%;
+    color: $default-color;
+    display: inline-block;
+    &:after {
+      @include absolute($top: 50%, $left: 50%);
+      border: 2px solid;
+      border-radius: 50%;
+      content: "";
+      transform: translate(-50%, -50%);
+    }
+    &:hover {
+     @include mouse-effects(pointer, none, 0, initial, 2px solid);
+     @include opacity(.7);
+    }
+    &.active {
+      @include mouse-effects(pointer, none, 0, initial, 3px solid);
+      @include opacity(1);
+    }
+  }
+}

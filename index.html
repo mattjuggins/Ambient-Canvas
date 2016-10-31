@@ -1,0 +1,126 @@
+<!--
+@Author: Matthew Juggins <matthewjuggins>
+@Date:   04-10-16
+@Email:  jugginsmatthew@gmail.com
+@Last modified by:   matthewjuggins
+@Last modified time: 26-10-16
+-->
+
+
+<head>
+  <link href="style.min.css" rel="stylesheet" type="text/css">
+  <script src="chord-progression-generator.js"></script>
+
+  <!-- Offline -->
+  <!-- Roboto Condensed Font -->
+  <link href="../CodeLibraries/min/font-awesome.min.css" rel="stylesheet">
+  <script src="../CodeLibraries/min/jquery-3.1.1.min.js"></script>
+  <script src="../CodeLibraries/min/Tone.min.js"></script>
+
+  <!-- Online -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+  <link href="//https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <!-- jQuery CDN -->
+  <!-- tone.js CDN -->
+</head>
+
+<body>
+<canvas id="canvas"></canvas>
+<canvas id="gridCanvas"></canvas>
+
+<!-- LEFT HAND PANEL -->
+<div id="panel-left">
+  <!-- DRAWING TOOLS -->
+  <div class="container-left">
+    <div id="thickness-option">
+      <div class="thickness" data-thickness="4" data-volume="-12"></div>
+      <div class="thickness" data-thickness="12" data-volume="-9"></div>
+      <div class="thickness" data-thickness="24" data-volume="-6"></div>
+      <div class="thickness active" data-thickness="48" data-volume="-3"></div>
+    </div>
+    <div id="pencil">
+      <div id="pencil-backing"></div>
+      <div id="pencil-image" class="sprite active" data-tool="pencil"></div>
+    </div>
+    <div id="eraser-image" class="sprite" data-tool="eraser"></div>
+  </div>
+  <!-- COLOUR WHEEL -->
+  <div class="container-left">
+    <div class="color-option">
+      <div class="slice">
+        <div class="color active" data-color="#ff4351" data-color-number="1"></div>
+      </div>
+      <div class="slice">
+        <div class="color" data-color="#fd6631" data-color-number="2"></div>
+      </div>
+      <div class="slice">
+        <div class="color" data-color="#fc880f" data-color-number="3"></div>
+      </div>
+      <div class="slice">
+        <div class="color" data-color="#feae1b" data-color-number="4"></div>
+      </div>
+      <div class="slice">
+        <div class="color" data-color="#ffd426" data-color-number="5"></div>
+      </div>
+      <div class="slice">
+        <div class="color" data-color="#a5de37" data-color-number="6"></div>
+      </div>
+      <div class="slice">
+        <div class="color" data-color="#49e845" data-color-number="7"></div>
+      </div>
+      <div class="slice">
+        <div class="color" data-color="#55dae1" data-color-number="8"></div>
+      </div>
+      <div class="slice">
+        <div class="color" data-color="#1b9af7" data-color-number="9"></div>
+      </div>
+      <div class="slice">
+        <div class="color" data-color="#7b72e9" data-color-number="10"></div>
+      </div>
+      <div class="slice">
+        <div class="color" data-color="#db49d8" data-color-number="11"></div>
+      </div>
+      <div class="slice">
+        <div class="color" data-color="#ed4694" data-color-number="12"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RIGHT HAND PANEL -->
+<div id="panel-right">
+  <div class="container-right">
+    <div id="clear-button">
+      <i class="fa fa-refresh fa-4x"></i>
+    </div>
+  </div>
+  <div class="container-right">
+    <h1 class="item-text">BEAT</h1>
+    <nav id="beat-option">
+      <div class="beat-button active" data-beat="0">
+        <p>1</p>
+      </div>
+      <div class="beat-button" data-beat="1">
+        <p>2</p>
+      </div>
+      <div class="beat-button" data-beat="2">
+        <p>3</p>
+      </div>
+    </nav>
+  </div>
+  <div class="container-right">
+    <h1 class="item-text">OVERLAY</h1>
+    <div class="slider musicInfo">
+      <input type="checkbox" value="0" id="musicInfoSlider" name="musicInfo" />
+      <label for="musicInfoSlider"></label>
+    </div>
+  </div>
+  <div id="text-container-right">
+    <span> &#8226 Touch down on the canvas to hear sound.<br>
+    &#8226 Position determines the note or chord played.<br>
+    &#8226 Colour determines the timbre.<br>
+      &#8226 Paint something beautiful.</span>
+  </div>
+</div>
+<script type="text/javascript" src="ambient-canvas.js"></script>
+</body>
