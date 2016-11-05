@@ -4,20 +4,9 @@
 * @Email:  jugginsmatthew@gmail.com
 * @Last modified by:   matthewjuggins
 * @Last modified time: 26-10-16
-* @Description:
+* @Description: Javascript for ambient-canvas app. Currently not working in Safari.
+*   Inspired by http://codepen.io/Lewitje/pen/dXpRmm
 */
-
-
-
-/*
- * Ambient Canvas.js
- * Matthew Juggins
- * Modified:
- *
- *
- * Possibly minor issue in Safari
- * Inspired by http://codepen.io/Lewitje/pen/dXpRmm
- */
 
 // Additional array function
 Array.prototype.rotate = function(n) {
@@ -101,9 +90,9 @@ var player3 = new Tone.Player({
   var APP = {
     init: function() {
       this.canvas = $('#canvas')[0];
-      this.canvasContext = canvas.getContext('2d');
+      this.canvasContext = canvas[0].getContext('2d');
       this.gridCanvas = $('#gridCanvas')[0];
-      this.gridCanvasContext = gridCanvas.getContext('2d');
+      this.gridCanvasContext = gridCanvas[0].getContext('2d');
       this.paint = false;
       this.currentThickness = 48;
       this.previousPoint = [0, 0];

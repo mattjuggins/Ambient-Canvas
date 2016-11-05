@@ -6,10 +6,9 @@
 // Description:
 
 
-/*
-@fa-font-path: "https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css";
-@fa-font-path: "../CodeLibraries/min/font-awesome.min.css";
-*/
+
+//@fa-font-path: "https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css";
+//$fa-font-path: "/assets/fonts";
 
 /* Variables */
 $font-face: 'Roboto Condensed', sans-serif;
@@ -261,7 +260,8 @@ ul {
 }
 
 .sprite {
-  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/713593/ambientCanvasSpriteSheet.png") no-repeat;
+  //background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/713593/ambientCanvasSpriteSheet.png") no-repeat;
+  background: url(/img/ambientCanvasSpriteSheet.png) no-repeat;
 }
 
 /* Tags by name A-Z */
